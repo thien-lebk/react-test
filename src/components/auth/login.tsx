@@ -3,11 +3,10 @@ import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { useState, useEffect } from "react";
 
 const Login = () => {
-
   const onFinish = (values: any) => {
-    alert("Login success!")
+    alert("Login success!");
   };
-  
+
   const [form] = Form.useForm();
   const [, forceUpdate] = useState({});
   const layout = {
@@ -29,21 +28,16 @@ const Login = () => {
   };
   /* eslint-enable no-template-curly-in-string */
 
-  async function validateEmail( email:any) {
+  async function validateEmail(email: any) {
     if (email) {
       var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-      if(!email.match(mailformat))
-      {
-        return Promise.reject(
-          new Error(
-            "Email is not a valid!"
-          )
-        );
+      if (!email.match(mailformat)) {
+        return Promise.reject(new Error("Email is not a valid!"));
       }
     }
     return Promise.resolve();
-  };
-  
+  }
+
   return (
     <Row justify="center" align="middle" style={{ minHeight: "80vh" }}>
       <Col>
@@ -57,22 +51,21 @@ const Login = () => {
             form={form}
           >
             <Row justify="center">
-              <Col span="8" >
+              <Col span="8">
                 <h1>Login</h1>
               </Col>
             </Row>
-           
+            {/* Email */}
             <Form.Item
               name="email"
               rules={[
                 {
-                 
                   required: true,
                   whitespace: false,
                 },
                 ({ getFieldValue }) => ({
                   validator(_, email) {
-                   return validateEmail(email);
+                    return validateEmail(email);
                   },
                 }),
               ]}
@@ -83,7 +76,7 @@ const Login = () => {
                 size="large"
               />
             </Form.Item>
-
+            {/* Password */}
             <Form.Item name="password" rules={[{ required: true }]}>
               <Input.Password
                 prefix={<LockOutlined className="site-form-item-icon" />}
@@ -91,6 +84,7 @@ const Login = () => {
                 size="large"
               />
             </Form.Item>
+            {/* Submit */}
             <Form.Item shouldUpdate wrapperCol={{ offset: 8, span: 16 }}>
               {() => (
                 <Button
